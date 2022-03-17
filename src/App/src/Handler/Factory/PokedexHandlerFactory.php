@@ -3,7 +3,7 @@
 namespace App\Handler\Factory;
 
 use App\Handler\PokedexHandler;
-use Database\Pokedex\PokedexRepository;
+use Database\Pokedex\Repository\PokedexRepository;
 use Mezzio\Twig\TwigRenderer;
 use Psr\Container\ContainerInterface;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Pokedex\Factory;
+namespace Database\Pokedex\Repository\Factory;
 
-use Database\Pokedex\PokedexDatabase;
-use Database\Pokedex\PokedexRepository;
+use Database\Pokedex\Database\PokedexDatabase;
+use Database\Pokedex\Repository\PokedexRepository;
 use Psr\Container\ContainerInterface;
 
 class PokedexRepositoryFactory

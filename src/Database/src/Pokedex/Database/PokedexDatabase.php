@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Pokedex;
+namespace Database\Pokedex\Database;
 
 use PDO;
 
@@ -10,7 +10,7 @@ class PokedexDatabase extends PDO
     {
         $dsn = 'mysql:host=localhost;dbname=pokedex';
         $username = 'root';
-        $password = 'password';
+        $password = '';
 
         parent::__construct($dsn, $username, $password);
     }

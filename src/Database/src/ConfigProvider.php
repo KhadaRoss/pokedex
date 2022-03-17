@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database;
 
+use Laminas\ServiceManager\Factory\InvokableFactory;
+
 class ConfigProvider
 {
     public function __invoke(): array
@@ -19,7 +21,8 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
-                \Database\Pokedex\PokedexRepository::class => \Database\Pokedex\Factory\PokedexRepositoryFactory::class,
+                Pokedex\Repository\PokedexRepository::class => Pokedex\Repository\Factory\PokedexRepositoryFactory::class,
+                Pokedex\Database\PokedexDatabase::class => InvokableFactory::class,
             ],
         ];
     }
