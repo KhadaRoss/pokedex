@@ -2,8 +2,16 @@
 
 {% block title %}Pokedex{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        #hello-word {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <div>
+    <div id="hello-word">
         Hello World!
     </div>
 {% endblock %}
