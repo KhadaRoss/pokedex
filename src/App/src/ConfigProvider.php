@@ -32,10 +32,9 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                \App\Handler\PokedexHandler::class => \App\Handler\Factory\PokedexHandlerFactory::class,
             ],
         ];
     }
