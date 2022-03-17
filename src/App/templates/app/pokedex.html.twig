@@ -3,15 +3,15 @@
 {% block title %}Pokedex{% endblock %}
 
 {% block stylesheets %}
-    <style>
-        #hello-word {
-            color: red;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
-    <div id="hello-word">
-        Hello World!
-    </div>
+    <h1>Pokedex</h1>
+    <ul>
+        {% for pokemon in pokemonModels %}
+            <li>
+                <a href="/pokemon/{{ pokemon.id }}">{{ pokemon.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
