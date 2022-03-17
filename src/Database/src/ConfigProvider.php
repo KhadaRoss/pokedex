@@ -19,6 +19,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                \Database\Pokedex\PokedexRepository::class => \Database\Pokedex\Factory\PokedexRepositoryFactory::class,
             ],
         ];
     }
