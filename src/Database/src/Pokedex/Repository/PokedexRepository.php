@@ -160,7 +160,7 @@ SQL;
                     array_map(fn(Type $type) => $type->getName(), $pokemon->getTypes())
                 );
 
-                if (count(array_intersect($searchParamTypes, $pokemonTypes)) === 0) {
+                if (count(array_intersect($searchParamTypes, $pokemonTypes)) < count($searchParamTypes)) {
                     unset($this->pokemon[$index]);
                 }
             }
