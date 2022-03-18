@@ -2,11 +2,35 @@
 <html lang="de">
     <head>
         <title>{% block title %}{% endblock %}</title>
+        <style>
+            body {
+                margin: 0;
+            }
+            main {
+                padding: 50px 10px;
+            }
+            header {
+                position: fixed;
+                width: 100%;
+                top: 0;
+                padding: 15px 10px;
+                border-bottom: 1px solid black;
+                background-color: #c8c8c8;
+            }
+            footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                padding: 15px 10px;
+                border-top: 1px solid black;
+                background-color: #c8c8c8;
+            }
+        </style>
         {% block stylesheets %}{% endblock %}
     </head>
     <body class="app">
         <header>
-            header
+            <a href="/">PokeDex</a>
         </header>
 
         <main>
@@ -14,7 +38,7 @@
         </main>
 
         <footer>
-            footer
+            <span>Kappi</span>
         </footer>
     </body>
 </html>

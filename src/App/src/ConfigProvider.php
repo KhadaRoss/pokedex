@@ -21,6 +21,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 \App\Handler\PokedexHandler::class => \App\Handler\Factory\PokedexHandlerFactory::class,
+                \App\Handler\PokemonHandler::class => \App\Handler\Factory\PokemonHandlerFactory::class,
             ],
         ];
     }

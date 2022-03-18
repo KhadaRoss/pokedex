@@ -100,7 +100,7 @@ class Pokemon
 
     public function addArea(Area $area, int $index): void
     {
-        $this->area[$index] = $area;
+        $this->areas[$index] = $area;
     }
 }
 

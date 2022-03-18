@@ -1,0 +1,86 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {% if pokemon is null %}
+
+        <span>Pokemon konnte nicht gefunden werden.</span>
+
+    {% else %}
+
+    <h1>#{{ pokemon.id }} {{ pokemon.name }}</h1>
+    <table>
+        <tr>
+            <td>Beschreibung</td>
+            <td>{{ pokemon.description }}</td>
+        </tr>
+        <tr>
+            <td>Versteckte Fähigkeiten</td>
+            <td>
+                <ul>
+                {% for vFaehigkeit in pokemon.vFaehigkeiten %}
+                    <li>{{ vFaehigkeit.name }} <br> {{ vFaehigkeit.description }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Fähigkeiten</td>
+            <td>
+                <ul>
+                    {% for faehigkeit in pokemon.faehigkeiten %}
+                        <li>{{ faehigkeit.name }} <br> {{ faehigkeit.description }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Geschlechter</td>
+            <td>
+                <ul>
+                    {% for gender in pokemon.gender %}
+                        <li>{{ gender.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Typen</td>
+            <td>
+                <ul>
+                    {% for type in pokemon.types %}
+                        <li>{{ type.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Areas</td>
+            <td>
+                <ul>
+                    {% if pokemon.areas is empty %}
+                        ---
+                    {% else %}
+                        {% for area in pokemon.areas %}
+                            <li>{{ area.name }}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    {% endif %}
+
+{% endblock %}

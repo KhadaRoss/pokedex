@@ -39,4 +39,5 @@ use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/', \App\Handler\PokedexHandler::class, 'pokedex');
+    $app->get('/pokemon/{id}', \App\Handler\PokemonHandler::class, 'pokemon');
 };
