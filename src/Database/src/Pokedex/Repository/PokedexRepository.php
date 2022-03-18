@@ -142,18 +142,48 @@ SQL;
     {
         $this->initPokemon();
 
-        $pokemonFiltered = [];
-        $hasActiveFilter = false;
-
         /** @var Pokemon $pokemon */
-        foreach ($this->pokemon as $pokemon) {
-            if (isset($searchParams['name']) && $searchParams['name'] && substr_count(strtolower($pokemon->getName()), strtolower($searchParams['name'])) > 0) {
-                $hasActiveFilter = true;
+        foreach ($this->pokemon as $index => $pokemon) {
+            if (isset($searchParams['name']) && $searchParams['name']) {
+                $searchParamName = strtolower($searchParams['name']);
+                $pokemonName = strtolower($pokemon->getName());
 
-                $pokemonFiltered[] = $pokemon;
+                if (substr_count($pokemonName, $searchParamName) === 0) {
+                    unset($this->pokemon[$index]);
+                }
+            }
+
+            if (isset($searchParams['type']) && $searchParams['type']) {
+                $searchParamTypes = array_map('strtolower', $searchParams['type']);
+                $pokemonTypes = array_map(
+                    'strtolower',
+                    array_map(fn(Type $type) => $type->getName(), $pokemon->getTypes())
+                );
+
+                if (count(array_intersect($searchParamTypes, $pokemonTypes)) === 0) {
+                    unset($this->pokemon[$index]);
+                }
             }
         }
 
-        return $hasActiveFilter ? $pokemonFiltered : $this->pokemon;
+        return $this->pokemon;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAllTypes(): array
+    {
+        $types = [];
+
+        $query = <<<SQL
+SELECT DISTINCT typen.Name as name FROM typen;
+SQL;
+
+        foreach ($this->pokedexDatabase->query($query) as $row) {
+            $types[] = $row['name'];
+        }
+
+        return $types;
     }
 }

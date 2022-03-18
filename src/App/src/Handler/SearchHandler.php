@@ -30,6 +30,8 @@ class SearchHandler implements RequestHandlerInterface
         $params['pokemonModels'] = $this->pokedexRepository->findAllBy($searchParams);
         $params['h1'] = 'Pokedex - Suche';
         $params['search_name_value'] = $searchParams['name'] ?? '';
+        $params['types'] = $this->pokedexRepository->getAllTypes();
+        $params['search_types'] = $searchParams['type'] ?? [];
 
         return new HtmlResponse(
             $this->twigRenderer->render(

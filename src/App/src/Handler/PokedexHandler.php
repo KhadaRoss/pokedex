@@ -28,6 +28,8 @@ class PokedexHandler implements RequestHandlerInterface
 
         $params['pokemonModels'] = $this->pokedexRepository->findAll();
         $params['h1'] = 'Pokedex';
+        $params['types'] = $this->pokedexRepository->getAllTypes();
+        $params['search_types'] = $searchParams['type'] ?? [];
 
         return new HtmlResponse(
             $this->twigRenderer->render(

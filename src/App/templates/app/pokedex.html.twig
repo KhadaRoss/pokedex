@@ -7,19 +7,36 @@
         form {
             padding-top: 10px;
         }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li > div {
+            width: 40px;
+            display: inline-block;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
     <form action="/search">
         <input name="name" placeholder="Pokemon Name" value="{% if search_name_value is defined %}{{ search_name_value }}{% endif %}">
+
+        {% for type in types %}
+            <input type="checkbox" name="type[]" id="type_{{ type }}" value="{{ type }}" {% if type in search_types %}checked{% endif %}>
+            <label for="type_{{ type }}">{{ type }}</label>
+        {% endfor %}
+
+        <br>
+        <br>
+
+        <button>suchen</button>
     </form>
     <h1>{{ h1 }}</h1>
     <ul>
         {% for pokemon in pokemonModels %}
-            <li>
-                <a href="/pokemon/{{ pokemon.id }}">{{ pokemon.name }}</a>
-            </li>
+            <li><div>#{{ pokemon.id }}</div><a href="/pokemon/{{ pokemon.id }}">{{ pokemon.name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
