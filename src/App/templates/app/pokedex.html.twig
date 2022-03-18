@@ -3,10 +3,18 @@
 {% block title %}Pokedex{% endblock %}
 
 {% block stylesheets %}
+    <style>
+        form {
+            padding-top: 10px;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
-    <h1>Pokedex</h1>
+    <form action="/search">
+        <input name="name" placeholder="Pokemon Name" value="{% if search_name_value is defined %}{{ search_name_value }}{% endif %}">
+    </form>
+    <h1>{{ h1 }}</h1>
     <ul>
         {% for pokemon in pokemonModels %}
             <li>

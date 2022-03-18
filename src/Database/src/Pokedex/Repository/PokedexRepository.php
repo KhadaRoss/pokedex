@@ -24,6 +24,13 @@ class PokedexRepository
         $this->pokedexDatabase = $pokedexDatabase;
     }
 
+    public function findById(int $id): ?Pokemon
+    {
+        $this->initPokemon();
+
+        return $this->pokemon[$id] ?? null;
+    }
+
     private function initPokemon(): void
     {
         if (count($this->pokemon) > 0) {
@@ -118,13 +125,6 @@ SQL;
         }
     }
 
-    public function findById(int $id): ?Pokemon
-    {
-        $this->initPokemon();
-
-        return $this->pokemon[$id] ?? null;
-    }
-
     /**
      * @return Pokemon[]
      */
@@ -133,5 +133,27 @@ SQL;
         $this->initPokemon();
 
         return $this->pokemon;
+    }
+
+    /**
+     * @return Pokemon[]
+     */
+    public function findAllBy(array $searchParams): array
+    {
+        $this->initPokemon();
+
+        $pokemonFiltered = [];
+        $hasActiveFilter = false;
+
+        /** @var Pokemon $pokemon */
+        foreach ($this->pokemon as $pokemon) {
+            if (isset($searchParams['name']) && $searchParams['name'] && substr_count(strtolower($pokemon->getName()), strtolower($searchParams['name'])) > 0) {
+                $hasActiveFilter = true;
+
+                $pokemonFiltered[] = $pokemon;
+            }
+        }
+
+        return $hasActiveFilter ? $pokemonFiltered : $this->pokemon;
     }
 }

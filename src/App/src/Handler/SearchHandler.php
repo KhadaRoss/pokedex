@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class PokedexHandler implements RequestHandlerInterface
+class SearchHandler implements RequestHandlerInterface
 {
     private TwigRenderer $twigRenderer;
     private PokedexRepository $pokedexRepository;
@@ -24,10 +24,12 @@ class PokedexHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $params = [];
+        $searchParams = $request->getQueryParams();
 
-        $params['pokemonModels'] = $this->pokedexRepository->findAll();
-        $params['h1'] = 'Pokedex';
+        $params = [];
+        $params['pokemonModels'] = $this->pokedexRepository->findAllBy($searchParams);
+        $params['h1'] = 'Pokedex - Suche';
+        $params['search_name_value'] = $searchParams['name'] ?? '';
 
         return new HtmlResponse(
             $this->twigRenderer->render(
